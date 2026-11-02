@@ -3,6 +3,7 @@ package part04;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.Map;
 
 /**
  * In this class, you will learn how to use the map() method to transform the
@@ -44,7 +45,7 @@ public class MappingStreams {
      */
     public IntStream multiplyValuesInStream(IntStream numbers, int multiplier) {
         // hint: use the map() method to multiply the values in the stream.
-        return null; // TODO
+        return numbers.map((number) -> multiplier); // TODO
     }
 
     /**
@@ -58,7 +59,7 @@ public class MappingStreams {
          * hint: First, use the stream() method to create a Stream<Integer>.
          * Then, use mapToInt() method to convert that to an IntStream.
          */
-        return null; // TODO
+        return numbers.stream().mapToInt(Integer::intValue); // TODO
     }
 
     /**
@@ -127,7 +128,7 @@ public class MappingStreams {
      * @param numbers the stream of numbers to convert
      * @return a stream of strings
      */
-    public Stream<String> streamFizzBuzz(IntStream numbers) {
+    public IntStream streamFizzBuzz(IntStream numbers) {
         /*
          * The FizzBuzz pattern is as follows:
          * - if the number is divisible by both 3 and 5, the string is "FizzBuzz"
@@ -137,6 +138,9 @@ public class MappingStreams {
          */
 
         // hint: see the mapToObj() method in IntStream
-        return null; // TODO
+
+        return numbers.map((number) -> number * 2);
+
+        // TODO
     }
 }
