@@ -1,9 +1,11 @@
 package part04;
 
+import java.util.function.Function;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * In this class, you will learn how to use the map() method to transform the
@@ -32,7 +34,7 @@ public class MappingStreams {
      */
     public IntStream doubleValuesInStream(IntStream numbers) {
         // hint: use the map() method to double the values in the stream.
-        return null; // TODO
+        return numbers.map(number -> number * 2);
     }
 
     /**
@@ -45,7 +47,7 @@ public class MappingStreams {
      */
     public IntStream multiplyValuesInStream(IntStream numbers, int multiplier) {
         // hint: use the map() method to multiply the values in the stream.
-        return numbers.map((number) -> multiplier); // TODO
+        return numbers.map((number) -> number * multiplier); // TODO
     }
 
     /**
@@ -77,7 +79,7 @@ public class MappingStreams {
      */
     public Stream<String> prefixAllStrings(Stream<String> strings, String prefix) {
         // hint: once again, use the map() method to add the prefix
-        return null; // TODO
+        return strings.map(str -> prefix + str);
     }
 
     /**
@@ -93,7 +95,7 @@ public class MappingStreams {
      * @return a stream of strings with the suffix added
      */
     public Stream<String> suffixAllStrings(Stream<String> strings, String suffix) {
-        return null; // TODO
+        return strings.map(str -> str + suffix);
     }
 
     /**
@@ -109,12 +111,19 @@ public class MappingStreams {
      * @param suffix  the substring to remove from the end of each string
      * @return a stream of strings with the suffix removed
      */
-    public Stream<String> removeSuffix(Stream<String> strings, String suffix) {
+    public Stream<String> removeSuffix(Stream<String> esimerkkiJonot, String loppupaate) {
         /*
          * hint: If your expression is too complex, you can define a separate method
          * that you call from the lambda expression.
          */
-        return null; // TODO
+        Function<String, String> remove = str -> {
+            if (!str.endsWith(loppupaate)) {
+                return str;
+            }
+            return str.substring(0, str.length() - loppupaate.length());
+        };
+
+        return esimerkkiJonot.map(remove);
     }
 
     /**
@@ -128,7 +137,7 @@ public class MappingStreams {
      * @param numbers the stream of numbers to convert
      * @return a stream of strings
      */
-    public IntStream streamFizzBuzz(IntStream numbers) {
+    public Stream<String> streamFizzBuzz(IntStream numbers) {
         /*
          * The FizzBuzz pattern is as follows:
          * - if the number is divisible by both 3 and 5, the string is "FizzBuzz"
@@ -139,8 +148,15 @@ public class MappingStreams {
 
         // hint: see the mapToObj() method in IntStream
 
-        return numbers.map((number) -> number * 2);
-
-        // TODO
+        return numbers.mapToObj(number -> {
+            if (number % 15 == 0) {
+                return "FizzBuzz";
+            } else if (number % 3 == 0) {
+                return "Fizz";
+            } else if (number % 5 == 0) {
+                return "Buzz";
+            }
+            return String.valueOf(number);
+        });
     }
 }
